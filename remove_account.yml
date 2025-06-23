@@ -3,7 +3,7 @@
   hosts: all:!localhost
   become: true
   become_method: sudo
-  gather_facts: false
+  gather_facts: true
   tasks:
     - name: "Remove a local account "
       ansible.builtin.user:
