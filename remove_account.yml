@@ -9,7 +9,7 @@
       ansible.builtin.user:
         name: "{{ username }}"
         state: absent
-        force: {{ force_remove | bool | default(false) }}
+        force: "{{ force_remove | bool | default(false) }}"
       when:
         - username is defined
         - username | length > 0
