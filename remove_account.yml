@@ -1,0 +1,18 @@
+---
+- name: "Remove a user on remote hosts"
+  hosts: all:!localhost
+  become: true
+  become_method: sudo
+  gather_facts: false
+  tasks:
+    - name: "Remove a local account "
+      ansible.builtin.user:
+        name: "{{ username }}"
+        state: absent
+        force: {{ force_remove | bool | default(false) }}
+      when:
+        - username is defined
+        - username | length > 0
+        - username != 'root'
+        - username != ansible_user_id
+        - username != ansible_user
